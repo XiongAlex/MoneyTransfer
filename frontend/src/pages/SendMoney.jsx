@@ -15,7 +15,7 @@ export const SendMoney = () => {
   const handleTransfer = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/account/transfer",
+        "http://localhost:3000/api/v1/account/transfer",
         {
           to: id,
           amount,
