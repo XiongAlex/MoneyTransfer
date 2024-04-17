@@ -33,7 +33,7 @@ stages:
     steps:
     - task: PublishBuildArtifacts@1
       inputs:
-        pathtoPublish: '$(System.DefaultWorkingDirectory)/build'  # Path to your built artifacts
+        pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'  # Path to your built artifacts
         artifactName: 'react-app'  # Name of the artifact to publish
 
 - stage: DeployToDev
