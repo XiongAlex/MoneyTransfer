@@ -6,9 +6,10 @@ pool:
 
 stages:
 - stage: Build
+  displayName: 'Build Stage'
   jobs:
   - job: BuildJob
-    displayName: 'Build Stage Job'
+    displayName: 'Build Job'
     steps:
     - checkout: self
       persistCredentials: true  # Persist the GitHub connection using Personal Access Token
@@ -22,3 +23,57 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+
+- stage: Deliver
+  displayName: 'Deliver Stage'
+  dependsOn: Build
+  jobs:
+  - job: DeliverJob
+    displayName: 'Deliver Job'
+    steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(System.DefaultWorkingDirectory)/build'  # Path to your built artifacts
+        artifactName: 'react-app'  # Name of the artifact to publish
+
+- stage: DeployToDev
+  displayName: 'Deploy to Dev Env Stage'
+  dependsOn: Deliver
+  jobs:
+  - job: DeployToDevJob
+    displayName: 'Deploy to Dev Env Job'
+    steps:
+    - script: echo "Skipping deployment to Dev environment"
+      displayName: 'Mocked deployment'
+
+- stage: DeployToQAT
+  displayName: 'Deploy to QAT Env Stage'
+  dependsOn: DeployToDev
+  condition: false  # Mocked stage since QAT environment is not applicable
+  jobs:
+  - job: DeployToQATJob
+    displayName: 'Deploy to QAT Env Job'
+    steps:
+    - script: echo "Skipping deployment to QAT environment"
+      displayName: 'Mocked deployment'
+
+- stage: DeployToStaging
+  displayName: 'Deploy to Staging Env Stage'
+  dependsOn: DeployToQAT
+  condition: false  # Mocked stage since Staging environment is not applicable
+  jobs:
+  - job: DeployToStagingJob
+    displayName: 'Deploy to Staging Env Job'
+    steps:
+    - script: echo "Skipping deployment to Staging environment"
+      displayName: 'Mocked deployment'
+
+- stage: DeployToProduction
+  displayName: 'Deploy to Production Env Stage'
+  dependsOn: DeployToStaging
+  jobs:
+  - job: DeployToProductionJob
+    displayName: 'Deploy to Production Env Job'
+    steps:
+    - script: echo "Skipping deployment to Production environment"
+      displayName: 'Mocked deployment'
