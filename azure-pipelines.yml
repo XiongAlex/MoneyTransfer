@@ -34,7 +34,7 @@ stages:
     - task: PublishPipelineArtifact@0
       displayName: 'Publish pipeline artifact'
       inputs:
-        artifactName: 'drop'
+        artifactName: 'MoneyTransferArtifact'
         targetPath: '$(Build.ArtifactStagingDirectory)'
 
 - stage: DeployToDev
