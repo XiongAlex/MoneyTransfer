@@ -22,20 +22,3 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
-
-    - task: SonarQubePrepare@4
-      inputs:
-        SonarQube: 'SonarQube'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'Your_Project_Key'
-        cliProjectName: 'Your_Project_Name'
-        cliSources: '.'
-        extraProperties: '-X'
-
-
-    - task: SonarQubeAnalyze@4
-
-    - task: SonarQubePublish@4
-      inputs:
-        pollingTimeoutSec: '300'
