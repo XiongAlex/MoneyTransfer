@@ -31,10 +31,11 @@ stages:
   - job: DeliverJob
     displayName: 'Deliver Job'
     steps:
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@0
+      displayName: 'Publish pipeline artifact'
       inputs:
-        pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'  # Path to your built artifacts
-        artifactName: 'react-app'  # Name of the artifact to publish
+        artifactName: 'drop'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
 
 - stage: DeployToDev
   displayName: 'Deploy to Dev Env Stage'
