@@ -25,12 +25,14 @@ stages:
 
     - task: SonarQubePrepare@4
       inputs:
-        SonarQube: 'SonarQube'  # Name of the SonarQube service connection in Azure DevOps
+        SonarQube: 'SonarQube'
         scannerMode: 'CLI'
         configMode: 'manual'
         cliProjectKey: 'Your_Project_Key'
         cliProjectName: 'Your_Project_Name'
-        cliSources: '.'  # Path to your source code
+        cliSources: '.'
+        extraProperties: '-X'
+
 
     - task: SonarQubeAnalyze@4
 
